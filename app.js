@@ -30,6 +30,12 @@ class App {
       this.selectNote(event);
       this.openModal(event);
     })  
+
+    document.body.addEventListener('mouseover', event=> {
+      this.openTooltip(event);
+    })
+
+
     this.$form.addEventListener('submit', event => {
       console.log(event)
       event.preventDefault();
@@ -94,6 +100,12 @@ class App {
     this.$modal.classList.toggle('open-modal');
   }
 
+  openTooltip(event){
+    if(!event.target.matches(".toolbar-delete")) return;
+    const selectElementId = event.target.nextElementSibling.dataset.id;
+    console.log(selectElementId)
+
+  }
 
   addNote({title, text}) {
     const newNote = {
@@ -113,7 +125,7 @@ class App {
     this.notes = this.notes.map( note =>
       note.id === Number(this.id) ? {...note, title, text} : note
     );
-    
+
     this.displayNotes();
   }
 
@@ -138,8 +150,8 @@ class App {
         <div class= "note-text">${note.text}</div>
         <div class="toolbar-container">
           <div class="toolbar">
-          <img class="toolbar-color" src="https://icon.now.sh/palette">
-          <img class="toolbar-delete" src="https://icon.now.sh/delete">
+          <img class="toolbar-color" src="img/palette.png">
+          <img class="toolbar-delete" src="img/delete.png">
           </div>
         </div>
 
